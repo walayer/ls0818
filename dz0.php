@@ -1,7 +1,7 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: walay
- * Date: 14.08.2018
- * Time: 0:33
- */
+CONST testConstanta = 'asd';
+$user_name = "Igor";
+
+function show_something(){ RETURN 'SOMETHING';}
+
+if (1==1) echo 'hi';
