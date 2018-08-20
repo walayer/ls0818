@@ -132,14 +132,25 @@ echo '====== Задание 6 ======'.PHP_EOL;
 echo PHP_EOL;
 
 echo '<table border="1">';
-for ($i = 1; $i <= 10; $i++) {
+for ($i = 0; $i <= 10; $i++) {
     echo '<tr align="center">';
-    for ($j = 1; $j <= 10; $j++) {
-        if (($i % 2 == 0) && ($j % 2 == 0)) {
+    for ($j = 0; $j <= 10; $j++) {
+        if (($i == 0) && ($j == 0)) {
+            echo '<td>';
+            echo '';
+            echo '</td>';
+        } elseif ($i == 0) {
+            echo '<td>';
+            echo $j;
+            echo '</td>';
+        } elseif ($j == 0) {
+            echo '<td>';
+            echo $i;
+            echo '</td>';
+        } elseif (($i % 2 == 0) && ($j % 2 == 0) && ($i >= 1) && ($j >= 1)) {
             echo '<td>';
             echo '(' . $i * $j . ')';
-            echo '</td>';
-        } elseif (($i % 2 == 1) && ($j % 2 == 1)) {
+        } elseif (($i % 2 == 1) && ($j % 2 == 1) && ($i >= 1) && ($j >= 1)) {
             echo '<td>';
             echo '[' . $i * $j . ']';
             echo '</td>';
