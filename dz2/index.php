@@ -94,11 +94,11 @@ echo PHP_EOL;
 $str = 'Карл у Клары украл Кораллы';
 $repl = 'К';
 $on = '';
-$rez = task5($str, $repl, $on);
+$res = task5($str, $repl, $on);
 
 echo 'Исходная строка: "'.$str.'"'.PHP_EOL;
 echo 'Заменяем "'.$repl.'" на "'.$on.'"'.PHP_EOL;
-echo 'Результат: "'.$rez.'"'.PHP_EOL;
+echo 'Результат: "'.$res.'"'.PHP_EOL;
 
 echo PHP_EOL;
 
@@ -108,11 +108,11 @@ echo PHP_EOL;
 $str = 'Две бутылки лимонада';
 $repl = 'Две';
 $on = 'Три';
-$rez = task5($str, $repl, $on);
+$res = task5($str, $repl, $on);
 
 echo 'Исходная строка: "'.$str.'"'.PHP_EOL;
 echo 'Заменяем "'.$repl.'" на "'.$on.'"'.PHP_EOL;
-echo 'Результат: "'.$rez.'"'.PHP_EOL;
+echo 'Результат: "'.$res.'"'.PHP_EOL;
 
 /** Задание 6 */
 echo PHP_EOL;

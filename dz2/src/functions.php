@@ -6,40 +6,40 @@
  * Time: 14:15
  */
 
-function task1($mass, $flag = null)
+function task1($array, $flag = null)
 {
-    $rez = '';
+    $res = '';
     if ($flag) {
-        foreach ($mass as $mas) {
-            if (empty($rez)) {
-                $rez = $mas;
+        foreach ($array as $arr) {
+            if (empty($res)) {
+                $res = $arr;
             } else {
-                $rez = $rez . ' ' . $mas;
+                $res = $res . ' ' . $arr;
             }
         }
     } else {
-        foreach ($mass as $mas) {
-            echo '<p>' . $mas . '</p>';
+        foreach ($array as $arr) {
+            echo '<p>' . $arr . '</p>';
         }
     }
-    return $rez;
+    return $res;
 }
 
-function task2_1(...$mass)
+function task2_1(...$array)
 {
     $i = 0;
     $op = 0;
-    $rez = 0;
+    $res = 0;
     $err = 0;
     $sym = ['+','-','*','/','%'];
 
-    if (in_array($mass[0], $sym)) {
-        foreach ($mass as $mas) {
-            if (($i != 0) && (is_int($mas) || is_float($mas))) {
+    if (in_array($array[0], $sym)) {
+        foreach ($array as $arr) {
+            if (($i != 0) && (is_int($arr) || is_float($arr))) {
                 if (($i == 1)) {
-                    $op = $mas;
+                    $op = $arr;
                 } elseif (($i != 0)) {
-                    $op = $op.' '.$mass[0].' '.$mas;
+                    $op = $op.' '.$array[0].' '.$arr;
                 }
             } elseif (($i != 0)) {
                 $err = 1;
@@ -50,48 +50,48 @@ function task2_1(...$mass)
         }
     } else {
         $err = 1;
-        echo 'Певрое значение - не знак арифметической операции!'.PHP_EOL;
+        echo 'Первое значение - не знак арифметической операции!'.PHP_EOL;
     }
     if ($err == 0) {
-        eval("\$rez= $op;");
+        eval("\$res= $op;");
     } else {
         echo 'В ходе выполнения операции возникла ошибка!'.PHP_EOL;
     }
 
-    echo $op.' = '.$rez.PHP_EOL;
-    return $rez;
+    echo $op.' = '.$res.PHP_EOL;
+    return $res;
 }
 
-function task2_2(...$mass)
+function task2_2(...$array)
 {
     $i = 0;
     $op = 0;
     $form = 0;
-    $rez = 0;
+    $res = 0;
     $err = 0;
     $sym = ['+','-','*','/','%'];
 
-    if (in_array($mass[0], $sym)) {
-        foreach ($mass as $mas) {
-            if (($i != 0) && (is_int($mas) || is_float($mas))) {
+    if (in_array($array[0], $sym)) {
+        foreach ($array as $arr) {
+            if (($i != 0) && (is_int($arr) || is_float($arr))) {
                 if (($i == 1)) {
-                    $op = $mas;
-                    $form = $mas;
-                } elseif (($i != 0) && ($mass[0] == '+')) {
-                    $op = $op+$mas;
-                    $form = $form.' '.$mass[0].' '.$mas;
-                } elseif (($i != 0) && ($mass[0] == '-')) {
-                    $op = $op-$mas;
-                    $form = $form.' '.$mass[0].' '.$mas;
-                } elseif (($i != 0) && ($mass[0] == '*')) {
-                    $op = $op*$mas;
-                    $form = $form.' '.$mass[0].' '.$mas;
-                } elseif (($i != 0) && ($mass[0] == '/')) {
-                    $op = $op/$mas;
-                    $form = $form.' '.$mass[0].' '.$mas;
-                } elseif (($i != 0) && ($mass[0] == '%')) {
-                    $op = $op%$mas;
-                    $form = $form.' '.$mass[0].' '.$mas;
+                    $op = $arr;
+                    $form = $arr;
+                } elseif (($i != 0) && ($array[0] == '+')) {
+                    $op = $op+$arr;
+                    $form = $form.' '.$array[0].' '.$arr;
+                } elseif (($i != 0) && ($array[0] == '-')) {
+                    $op = $op-$arr;
+                    $form = $form.' '.$array[0].' '.$arr;
+                } elseif (($i != 0) && ($array[0] == '*')) {
+                    $op = $op*$arr;
+                    $form = $form.' '.$array[0].' '.$arr;
+                } elseif (($i != 0) && ($array[0] == '/')) {
+                    $op = $op/$arr;
+                    $form = $form.' '.$array[0].' '.$arr;
+                } elseif (($i != 0) && ($array[0] == '%')) {
+                    $op = $op%$arr;
+                    $form = $form.' '.$array[0].' '.$arr;
                 }
             } elseif (($i != 0)) {
                 $err = 1;
@@ -102,16 +102,16 @@ function task2_2(...$mass)
         }
     } else {
         $err = 1;
-        echo 'Певрое значение - не знак арифметической операции!'.PHP_EOL;
+        echo 'Первое значение - не знак арифметической операции!'.PHP_EOL;
     }
     if ($err == 0) {
-        $rez = $op;
+        $res = $op;
     } else {
         echo 'В ходе выполнения операции возникла ошибка!'.PHP_EOL;
     }
 
-    echo $form.' = '.$rez.PHP_EOL;
-    return $rez;
+    echo $form.' = '.$res.PHP_EOL;
+    return $res;
 }
 
 function task3($x1, $x2)
