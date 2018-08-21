@@ -6,163 +6,183 @@
  * Time: 14:15
  */
 
-function task1($array, $flag = null)
+/** Функция принимает массив строк и выводит каждую строку в отдельном параграфе;
+если в функцию передан второй параметр true, то возвращает результат в виде одной объединенной строки
+ */
+function task1($strings, $flag = null)
 {
-    $res = '';
+    $result = '';
     if ($flag) {
-        foreach ($array as $arr) {
-            if (empty($res)) {
-                $res = $arr;
+        foreach ($strings as $string) {
+            if (empty($result)) {
+                $result = $string;
             } else {
-                $res = $res . ' ' . $arr;
+                $result = $result . ' ' . $string;
             }
         }
     } else {
-        foreach ($array as $arr) {
-            echo '<p>' . $arr . '</p>';
+        foreach ($strings as $string) {
+            echo '<p>' . $string . '</p>';
         }
     }
-    return $res;
+    return $result;
 }
 
-function task2_1(...$array)
+/**
+Функция принимает переменное число аргументов;
+первым аргументом является строка, обозначающая арифметическое действие, которое выполняется со всеми остальными
+передаваемыми аргументами (которые являются целыми и/или вещественными числами).
+Расчёт производится через eval
+ */
+function task2_1(...$arguments)
 {
-    $i = 0;
-    $op = 0;
-    $res = 0;
-    $err = 0;
-    $sym = ['+','-','*','/','%'];
+    $first_argument = true;
+    $formula = '';
+    $result = 0;
+    $error = false;
+    $arithmetic_operations = ['+','-','*','/','%'];
+    $arithmetic_operation = array_shift($arguments);
 
-    if (in_array($array[0], $sym)) {
-        foreach ($array as $arr) {
-            if (($i != 0) && (is_int($arr) || is_float($arr))) {
-                if (($i == 1)) {
-                    $op = $arr;
-                } elseif (($i != 0)) {
-                    $op = $op.' '.$array[0].' '.$arr;
+    if (in_array($arithmetic_operation, $arithmetic_operations)) {
+        foreach ($arguments as $argument) {
+            if (is_int($argument) || is_float($argument)) {
+                if ($first_argument) {
+                    $formula = $argument;
+                } else {
+                    $formula = $formula.' '.$arithmetic_operation.' '.$argument;
                 }
-            } elseif (($i != 0)) {
-                $err = 1;
+            } elseif (($first_argument != 0)) {
+                $error = true;
                 echo 'Одно из значений не является числом!'.PHP_EOL;
                 break;
             }
-            $i++;
+            $first_argument = false;
         }
     } else {
-        $err = 1;
+        $error = true;
         echo 'Первое значение - не знак арифметической операции!'.PHP_EOL;
     }
-    if ($err == 0) {
-        eval("\$res= $op;");
+    if (!$error) {
+        eval("\$result= $formula;");
     } else {
         echo 'В ходе выполнения операции возникла ошибка!'.PHP_EOL;
     }
 
-    echo $op.' = '.$res.PHP_EOL;
-    return $res;
+    echo $formula.' = '.$result.PHP_EOL;
+    return $result;
 }
 
-function task2_2(...$array)
+/**
+Функция принимает переменное число аргументов;
+первым аргументом является строка, обозначающая арифметическое действие, которое выполняется со всеми остальными
+передаваемыми аргументами (которые являются целыми и/или вещественными числами).
+Расчёт производится НЕ через eval
+ */
+function task2_2(...$arguments)
 {
-    $i = 0;
-    $op = 0;
-    $form = 0;
-    $res = 0;
-    $err = 0;
-    $sym = ['+','-','*','/','%'];
+    $first_argument = true;
+    $formula = '';
+    $result = 0;
+    $error = false;
+    $arithmetic_operations = ['+','-','*','/','%'];
+    $arithmetic_operation = array_shift($arguments);
 
-    if (in_array($array[0], $sym)) {
-        foreach ($array as $arr) {
-            if (($i != 0) && (is_int($arr) || is_float($arr))) {
-                if (($i == 1)) {
-                    $op = $arr;
-                    $form = $arr;
-                } elseif (($i != 0) && ($array[0] == '+')) {
-                    $op = $op+$arr;
-                    $form = $form.' '.$array[0].' '.$arr;
-                } elseif (($i != 0) && ($array[0] == '-')) {
-                    $op = $op-$arr;
-                    $form = $form.' '.$array[0].' '.$arr;
-                } elseif (($i != 0) && ($array[0] == '*')) {
-                    $op = $op*$arr;
-                    $form = $form.' '.$array[0].' '.$arr;
-                } elseif (($i != 0) && ($array[0] == '/')) {
-                    $op = $op/$arr;
-                    $form = $form.' '.$array[0].' '.$arr;
-                } elseif (($i != 0) && ($array[0] == '%')) {
-                    $op = $op%$arr;
-                    $form = $form.' '.$array[0].' '.$arr;
+    if (in_array($arithmetic_operation, $arithmetic_operations)) {
+        foreach ($arguments as $argument) {
+            if (is_int($argument) || is_float($argument)) {
+                if ($first_argument) {
+                    $result = $argument;
+                    $formula = $argument;
+                } elseif ($arithmetic_operation == '+') {
+                    $result = $result+$argument;
+                    $formula = $formula.' '.$arithmetic_operation.' '.$argument;
+                } elseif ($arithmetic_operation == '-') {
+                    $result = $result-$argument;
+                    $formula = $formula.' '.$arithmetic_operation.' '.$argument;
+                } elseif ($arithmetic_operation == '*') {
+                    $result = $result*$argument;
+                    $formula = $formula.' '.$arithmetic_operation.' '.$argument;
+                } elseif ($arithmetic_operation == '/') {
+                    $result = $result/$argument;
+                    $formula = $formula.' '.$arithmetic_operation.' '.$argument;
+                } elseif ($arithmetic_operation == '%') {
+                    $result = $result%$argument;
+                    $formula = $formula.' '.$arithmetic_operation.' '.$argument;
                 }
-            } elseif (($i != 0)) {
-                $err = 1;
+            } else {
+                $error = true;
                 echo 'Одно из значений не является числом!'.PHP_EOL;
                 break;
             }
-            $i++;
+            $first_argument = false;
         }
     } else {
-        $err = 1;
+        $error = true;
         echo 'Первое значение - не знак арифметической операции!'.PHP_EOL;
     }
-    if ($err == 0) {
-        $res = $op;
-    } else {
+    if ($error) {
         echo 'В ходе выполнения операции возникла ошибка!'.PHP_EOL;
     }
 
-    echo $form.' = '.$res.PHP_EOL;
-    return $res;
+    echo $formula.' = '.$result.PHP_EOL;
+    return $result;
 }
 
-function task3($x1, $x2)
+/**
+Функция принимает два параметра – целые числа;
+если в функцию передается 2 целых числа, то функция отображает таблицу умножения
+размером со значения параметров, переданных в функцию;
+в остальных случаях выдаёт ошибку.
+ */
+function task3($number1, $number2)
 {
-    if (is_int($x1) && (is_int($x2)) && ($x1 > 0) && ($x2 > 0)) {
+    if (is_int($number1) && (is_int($number2)) && ($number1 > 0) && ($number2 > 0)) {
         echo '<table border="1">';
-        for ($i = 0; $i <= $x1; $i++) {
+        for ($row = 0; $row <= $number1; $row++) {
             echo '<tr align="center">';
-            for ($j = 0; $j <= $x2; $j++) {
-                if (($i == 0) && ($j == 0)) {
+            for ($column = 0; $column <= $number2; $column++) {
+                if (($row == 0) && ($column == 0)) {
                     echo '<td bgcolor="#d3d3d3">';
                     echo '';
                     echo '</td>';
-                } elseif ($i == 0) {
+                } elseif ($row == 0) {
                     echo '<td bgcolor="#d3d3d3">';
-                    echo $j;
+                    echo $column;
                     echo '</td>';
-                } elseif ($j == 0) {
+                } elseif ($column == 0) {
                     echo '<td bgcolor="#d3d3d3">';
-                    echo $i;
+                    echo $row;
                     echo '</td>';
                 } else {
                     echo '<td>';
-                    echo $i * $j;
+                    echo $row * $column;
                     echo '</td>';
                 }
             }
             echo '</tr>';
         }
         echo '</table>';
-    } elseif ((is_int($x1)) && (is_int($x2)) && (($x1 <= 0) && ($x2 <= 0))) {
+    } elseif ((is_int($number1)) && (is_int($number2)) && (($number1 <= 0) && ($number2 <= 0))) {
         echo 'Количество строк и столбцов меньше либо равно 0!'.PHP_EOL;
         echo 'Построение таблицы не возможно!';
-    } elseif ((is_int($x1)) && (is_int($x2)) && ($x1 <= 0)) {
+    } elseif ((is_int($number1)) && (is_int($number2)) && ($number1 <= 0)) {
         echo 'Количество строк меньше либо равно 0!'.PHP_EOL;
         echo 'Построение таблицы не возможно!';
-    } elseif ((is_int($x1)) && (is_int($x2)) && ($x2 <= 0)) {
+    } elseif ((is_int($number1)) && (is_int($number2)) && ($number2 <= 0)) {
         echo 'Количество столбцов меньше либо равно 0!'.PHP_EOL;
         echo 'Построение таблицы не возможно!';
-    } elseif ((!is_int($x1)) && (is_int($x2)) && ($x2 <= 0)) {
+    } elseif ((!is_int($number1)) && (is_int($number2)) && ($number2 <= 0)) {
         echo 'Количество строк не является целым числом!'.PHP_EOL;
         echo 'Количество столбцов меньше либо равно 0!'.PHP_EOL;
         echo 'Построение таблицы не возможно!';
-    } elseif ((is_int($x1)) && (!is_int($x2)) && ($x1 <= 0)) {
+    } elseif ((is_int($number1)) && (!is_int($number2)) && ($number1 <= 0)) {
         echo 'Количество строк меньше либо равно 0!'.PHP_EOL;
         echo 'Количество столбцов не является целым числом!'.PHP_EOL;
         echo 'Построение таблицы не возможно!';
-    } elseif (!is_int($x1) && (!is_int($x2))) {
+    } elseif (!is_int($number1) && (!is_int($number2))) {
         echo 'Количество строк и столбцов не является целым числом!'.PHP_EOL;
         echo 'Построение таблицы не возможно!';
-    } elseif (!is_int($x1)) {
+    } elseif (!is_int($number1)) {
         echo 'Количество строк не является целым числом!'.PHP_EOL;
         echo 'Построение таблицы не возможно!';
     } else {
@@ -171,6 +191,10 @@ function task3($x1, $x2)
     }
 }
 
+/**
+Функция для вывода информации о текущей дате в формате 31.12.2016 23:59;
+в случае передачи в фукцию времени, как параметра, выводит переданное время в unixtime
+ */
 function task4($time = null)
 {
     if (empty($time)) {
@@ -181,16 +205,24 @@ function task4($time = null)
     return $date;
 }
 
-function task5($st, $lett, $repl = "")
+/**
+Функция для замены символов в строке на другие символы;
+передаются: строка (в которой необходимо осуществить замену), символ (который необходимо заменить),
+символ (на который необходимо осуществить замену (по-умолчанию - ""))
+ */
+function task5($string, $letter, $replace = "")
 {
-    $str = str_replace($lett, $repl, $st);
-    return $str;
+    $result = str_replace($letter, $replace, $string);
+    return $result;
 }
 
-function task6($file)
+/**
+Функция, принимающая имя файла и выводящая его содержимое на экран.
+ */
+function task6($filename)
 {
-    if (file_exists($file)) {
-        $text = file_get_contents($file);
+    if (file_exists($filename)) {
+        $text = file_get_contents($filename);
         echo 'Указанный файл найден!'.PHP_EOL;
         echo 'Его содержимое: "'.$text.'"'.PHP_EOL;
     } else {
