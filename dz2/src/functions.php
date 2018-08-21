@@ -23,9 +23,9 @@ function task1($mass, $flag = null)
         }
     }
     return $rez;
-};
+}
 
-function task2(...$mass)
+function task2_1(...$mass)
 {
     $i = 0;
     $op = 0;
@@ -58,9 +58,61 @@ function task2(...$mass)
         echo 'В ходе выполнения операции возникла ошибка!'.PHP_EOL;
     }
 
-    echo $op.' = '.$rez;
+    echo $op.' = '.$rez.PHP_EOL;
     return $rez;
-};
+}
+
+function task2_2(...$mass)
+{
+    $i = 0;
+    $op = 0;
+    $form = 0;
+    $rez = 0;
+    $err = 0;
+    $sym = ['+','-','*','/','%'];
+
+    if (in_array($mass[0], $sym)) {
+        foreach ($mass as $mas) {
+            if (($i != 0) && (is_int($mas) || is_float($mas))) {
+                if (($i == 1)) {
+                    $op = $mas;
+                    $form = $mas;
+                } elseif (($i != 0) && ($mass[0] == '+')) {
+                    $op = $op+$mas;
+                    $form = $form.' '.$mass[0].' '.$mas;
+                } elseif (($i != 0) && ($mass[0] == '-')) {
+                    $op = $op-$mas;
+                    $form = $form.' '.$mass[0].' '.$mas;
+                } elseif (($i != 0) && ($mass[0] == '*')) {
+                    $op = $op*$mas;
+                    $form = $form.' '.$mass[0].' '.$mas;
+                } elseif (($i != 0) && ($mass[0] == '/')) {
+                    $op = $op/$mas;
+                    $form = $form.' '.$mass[0].' '.$mas;
+                } elseif (($i != 0) && ($mass[0] == '%')) {
+                    $op = $op%$mas;
+                    $form = $form.' '.$mass[0].' '.$mas;
+                }
+            } elseif (($i != 0)) {
+                $err = 1;
+                echo 'Одно из значений не является числом!'.PHP_EOL;
+                break;
+            }
+            $i++;
+        }
+    } else {
+        $err = 1;
+        echo 'Певрое значение - не знак арифметической операции!'.PHP_EOL;
+    }
+    if ($err == 0) {
+        $rez = $op;
+    } else {
+        echo 'В ходе выполнения операции возникла ошибка!'.PHP_EOL;
+    }
+
+    echo $form.' = '.$rez.PHP_EOL;
+    return $rez;
+}
 
 function task3($x1, $x2)
 {
@@ -117,7 +169,7 @@ function task3($x1, $x2)
         echo 'Количество столбцов не является целым числом!'.PHP_EOL;
         echo 'Построение таблицы не возможно!';
     }
-};
+}
 
 function task4($time = null)
 {
@@ -127,13 +179,13 @@ function task4($time = null)
         $date = strtotime($time);
     }
     return $date;
-};
+}
 
-function task5($st, $bkv, $zam = "")
+function task5($st, $lett, $repl = "")
 {
-    $str = str_replace($bkv, $zam, $st);
+    $str = str_replace($lett, $repl, $st);
     return $str;
-};
+}
 
 function task6($file)
 {
@@ -144,4 +196,4 @@ function task6($file)
     } else {
         echo 'К сожалению, указанного файла не существует!';
     }
-};
+}

@@ -35,9 +35,16 @@ $x2 = rand(1, 10);
 $x3 = rand(1, 10);
 $x4 = (float)(rand(1, 10).'.'.rand(0, 9));
 
-task2($sym[$x1], $x2, 2, $x3, $x4);
+echo '====== Вариант 1 (с eval) ======'.PHP_EOL;
+echo PHP_EOL;
+
+task2_1($sym[$x1], $x2, 2, $x3, $x4);
 
 echo PHP_EOL;
+echo '====== Вариант 2 (без eval) ======'.PHP_EOL;
+echo PHP_EOL;
+
+task2_2($sym[$x1], $x2, 2, $x3, $x4);
 
 /** Задание 3 */
 echo PHP_EOL;
@@ -85,12 +92,12 @@ echo '====== Часть 1 ======'.PHP_EOL;
 echo PHP_EOL;
 
 $str = 'Карл у Клары украл Кораллы';
-$zam = 'К';
-$na = '';
-$rez = task5($str, $zam, $na);
+$repl = 'К';
+$on = '';
+$rez = task5($str, $repl, $on);
 
 echo 'Исходная строка: "'.$str.'"'.PHP_EOL;
-echo 'Заменяем "'.$zam.'" на "'.$na.'"'.PHP_EOL;
+echo 'Заменяем "'.$repl.'" на "'.$on.'"'.PHP_EOL;
 echo 'Результат: "'.$rez.'"'.PHP_EOL;
 
 echo PHP_EOL;
@@ -99,12 +106,12 @@ echo '====== Часть 2 ======'.PHP_EOL;
 echo PHP_EOL;
 
 $str = 'Две бутылки лимонада';
-$zam = 'Две';
-$na = 'Три';
-$rez = task5($str, $zam, $na);
+$repl = 'Две';
+$on = 'Три';
+$rez = task5($str, $repl, $on);
 
 echo 'Исходная строка: "'.$str.'"'.PHP_EOL;
-echo 'Заменяем "'.$zam.'" на "'.$na.'"'.PHP_EOL;
+echo 'Заменяем "'.$repl.'" на "'.$on.'"'.PHP_EOL;
 echo 'Результат: "'.$rez.'"'.PHP_EOL;
 
 /** Задание 6 */
