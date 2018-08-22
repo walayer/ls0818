@@ -41,15 +41,15 @@ function task2_1(...$arguments)
     $result = 0;
     $error = false;
     $arithmetic_operations = ['+','-','*','/','%'];
-    $arithmetic_operation = array_shift($arguments);
+    $currentOperation = array_shift($arguments);
 
-    if (in_array($arithmetic_operation, $arithmetic_operations)) {
+    if (in_array($currentOperation, $arithmetic_operations)) {
         foreach ($arguments as $argument) {
             if (is_int($argument) || is_float($argument)) {
                 if ($first_argument) {
                     $formula = $argument;
                 } else {
-                    $formula = $formula.' '.$arithmetic_operation.' '.$argument;
+                    $formula = $formula.' '.$currentOperation.' '.$argument;
                 }
             } elseif (($first_argument != 0)) {
                 $error = true;
@@ -85,29 +85,29 @@ function task2_2(...$arguments)
     $result = 0;
     $error = false;
     $arithmetic_operations = ['+','-','*','/','%'];
-    $arithmetic_operation = array_shift($arguments);
+    $currentOperation = array_shift($arguments);
 
-    if (in_array($arithmetic_operation, $arithmetic_operations)) {
+    if (in_array($currentOperation, $arithmetic_operations)) {
         foreach ($arguments as $argument) {
             if (is_int($argument) || is_float($argument)) {
                 if ($first_argument) {
                     $result = $argument;
                     $formula = $argument;
-                } elseif ($arithmetic_operation == '+') {
+                } elseif ($currentOperation == '+') {
                     $result = $result+$argument;
-                    $formula = $formula.' '.$arithmetic_operation.' '.$argument;
-                } elseif ($arithmetic_operation == '-') {
+                    $formula = $formula.' '.$currentOperation.' '.$argument;
+                } elseif ($currentOperation == '-') {
                     $result = $result-$argument;
-                    $formula = $formula.' '.$arithmetic_operation.' '.$argument;
-                } elseif ($arithmetic_operation == '*') {
+                    $formula = $formula.' '.$currentOperation.' '.$argument;
+                } elseif ($currentOperation == '*') {
                     $result = $result*$argument;
-                    $formula = $formula.' '.$arithmetic_operation.' '.$argument;
-                } elseif ($arithmetic_operation == '/') {
+                    $formula = $formula.' '.$currentOperation.' '.$argument;
+                } elseif ($currentOperation == '/') {
                     $result = $result/$argument;
-                    $formula = $formula.' '.$arithmetic_operation.' '.$argument;
-                } elseif ($arithmetic_operation == '%') {
+                    $formula = $formula.' '.$currentOperation.' '.$argument;
+                } elseif ($currentOperation == '%') {
                     $result = $result%$argument;
-                    $formula = $formula.' '.$arithmetic_operation.' '.$argument;
+                    $formula = $formula.' '.$currentOperation.' '.$argument;
                 }
             } else {
                 $error = true;

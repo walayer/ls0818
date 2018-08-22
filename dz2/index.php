@@ -182,3 +182,6 @@ echo PHP_EOL;
 
 $filename = 'text.txt';
 task6($filename);
+
+?>
+</pre>
