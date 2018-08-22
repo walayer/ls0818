@@ -36,27 +36,27 @@ function task1($strings, $flag = null)
  */
 function task2_1(...$arguments)
 {
-    $first_argument = true;
+    $firstArgument = true;
     $formula = '';
     $result = 0;
     $error = false;
-    $arithmetic_operations = ['+','-','*','/','%'];
+    $allOperation = ['+','-','*','/','%'];
     $currentOperation = array_shift($arguments);
 
-    if (in_array($currentOperation, $arithmetic_operations)) {
+    if (in_array($currentOperation, $allOperation)) {
         foreach ($arguments as $argument) {
             if (is_int($argument) || is_float($argument)) {
-                if ($first_argument) {
+                if ($firstArgument) {
                     $formula = $argument;
                 } else {
                     $formula = $formula.' '.$currentOperation.' '.$argument;
                 }
-            } elseif (($first_argument != 0)) {
+            } elseif (($firstArgument != 0)) {
                 $error = true;
                 echo 'Одно из значений не является числом!'.PHP_EOL;
                 break;
             }
-            $first_argument = false;
+            $firstArgument = false;
         }
     } else {
         $error = true;
@@ -80,17 +80,17 @@ function task2_1(...$arguments)
  */
 function task2_2(...$arguments)
 {
-    $first_argument = true;
+    $firstArgument = true;
     $formula = '';
     $result = 0;
     $error = false;
-    $arithmetic_operations = ['+','-','*','/','%'];
+    $allOperation = ['+','-','*','/','%'];
     $currentOperation = array_shift($arguments);
 
-    if (in_array($currentOperation, $arithmetic_operations)) {
+    if (in_array($currentOperation, $allOperation)) {
         foreach ($arguments as $argument) {
             if (is_int($argument) || is_float($argument)) {
-                if ($first_argument) {
+                if ($firstArgument) {
                     $result = $argument;
                     $formula = $argument;
                 } elseif ($currentOperation == '+') {
@@ -114,7 +114,7 @@ function task2_2(...$arguments)
                 echo 'Одно из значений не является числом!'.PHP_EOL;
                 break;
             }
-            $first_argument = false;
+            $firstArgument = false;
         }
     } else {
         $error = true;

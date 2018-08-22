@@ -43,8 +43,8 @@ echo $result.PHP_EOL;
 echo PHP_EOL;
 echo '<p><b>====== Задание 2 ======</b></p>'.PHP_EOL;
 
-$arithmetic_operations = ['+','-','*','/','%'];
-$number1 = array_rand($arithmetic_operations, 1);
+$allOperation = ['+','-','*','/','%'];
+$number1 = array_rand($allOperation, 1);
 $number2 = rand(1, 10);
 $number3 = rand(1, 10);
 $number4 = (float)(rand(1, 10).'.'.rand(0, 9));
@@ -52,13 +52,13 @@ $number4 = (float)(rand(1, 10).'.'.rand(0, 9));
 echo '====== Вариант 1 (с eval) ======'.PHP_EOL;
 echo PHP_EOL;
 
-task2_1($arithmetic_operations[$number1], $number2, 2, $number3, $number4);
+task2_1($allOperation[$number1], $number2, 2, $number3, $number4);
 
 echo PHP_EOL;
 echo '====== Вариант 2 (без eval) ======'.PHP_EOL;
 echo PHP_EOL;
 
-task2_2($arithmetic_operations[$number1], $number2, 2, $number3, $number4);
+task2_2($allOperation[$number1], $number2, 2, $number3, $number4);
 
 /** Задание 3 */
 /**
