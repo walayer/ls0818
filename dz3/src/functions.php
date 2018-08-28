@@ -66,11 +66,9 @@ function task2_2($filename, $flag)
     if ($flag) {
         echo 'Данные будут изменены!' . PHP_EOL;
 
-        $x1 = rand(0, 1);
-        $x2 = rand(0, 2);
-        $x3 = rand(0, 2);
+        $decoded2['t3'] = $decoded2['t1'];
+        unset($decoded2['t1']);
 
-        $decoded2[$x1][$x2][$x3] = rand(0, 100);
     } else {
         echo 'Данные НЕ будут изменены!' . PHP_EOL;
     }
@@ -94,32 +92,16 @@ function task2_3($filename1, $filename2)
 
     echo 'Массив '.$filename1.'  '.json_encode($decoded1, JSON_UNESCAPED_UNICODE).PHP_EOL;
     echo 'Массив '.$filename2.' '.json_encode($decoded2, JSON_UNESCAPED_UNICODE).PHP_EOL;
-//    echo $encoded1.PHP_EOL;
-//    echo $encoded2.PHP_EOL;
-    $difference = false;
-    foreach ($decoded1 as $key1_1 => $decode1) {
-        foreach ($decoded2 as $key2_1 => $decode2) {
-            foreach ($decode1 as $key1_2 => $decod1) {
-                foreach ($decode2 as $key2_2 => $decod2) {
-                    foreach ($decod1 as $key1_3 => $deco1) {
-                        foreach ($decod2 as $key2_3 => $deco2) {
-                            if (($key1_1 == $key2_1) && ($key1_2 == $key2_2) && ($key1_3 == $key2_3)) {
-                                if ($deco1 != $deco2) {
-                                    echo '<p>Различающиеся элементы: <b>'.$deco1 . ' ' . $deco2.'</b></p>'.PHP_EOL;
-                                    $difference = true;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+
+    $result = array_diff_key($decoded1, $decoded2);
+    if (!empty($result)) {
+        foreach ($result as $key => $item) {
+            echo 'Отличие в ключе: '.$key;
         }
-    }
-    if (!$difference) {
-        echo 'Различающихся элементов НЕТ!'.PHP_EOL;
+    } else {
+        echo 'Отличий нет!';
     }
 }
-
 
 /** Функция принимает размер создаваемого рандомного массива, сохраняет его в файл output.csv и
  * считает сумму четных чисел в нём
@@ -142,19 +124,17 @@ function task3_1($size)
 
     $fp = fopen($filename, 'r');
     $result = 0;
-    $formula = '';
 
     if ($fp) {
         while (($csvData = fgetcsv($fp, 1000, ";")) !== false) {
             echo 'Сумма четных чисел: ';
             foreach ($csvData as $element) {
                 if ($element % 2 == 0) {
-                    $formula = $formula.' '.$element;
                     $result += $element;
                 }
             }
         }
-        echo $formula.' = '.$result.PHP_EOL;
+        echo $result.PHP_EOL;
     }
 
     fclose($fp);

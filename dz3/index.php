@@ -36,12 +36,12 @@ echo '<p><b>====== Задание 2 ======</b></p>'.PHP_EOL;
 echo '====== Часть 1 ======'.PHP_EOL;
 
 $array = [
-        [
+        "t1"=>[
             [rand(0, 100),rand(0, 100),rand(0, 100)],
             [rand(0, 100),rand(0, 100),rand(0, 100)],
             [rand(0, 100),rand(0, 100),rand(0, 100)]
         ],
-        [
+        "t2"=>[
             [rand(0, 100),rand(0, 100),rand(0, 100)],
             [rand(0, 100),rand(0, 100),rand(0, 100)],
             [rand(0, 100),rand(0, 100),rand(0, 100)]
@@ -65,6 +65,11 @@ echo '====== Часть 3 ======'.PHP_EOL;
 echo PHP_EOL;
 
 task2_3($filename1, $filename2);
+$file1 = file_get_contents($filename1);
+$decoded1 = json_decode($file1, true);
+$file2 = file_get_contents($filename2);
+$decoded2 = json_decode($file2, true);
+
 
 /** Задание 3 */
 /**
